@@ -1,0 +1,13 @@
+= Getting Started With Spring REST Docs
+:toc: left
+:toclevels: 2
+:sectnums:
+:sectnumlevels: 3
+
+This is an example output for a service running at http://localhost:8080:
+
+
+include::{snippets}/api/student/curl-request.adoc[]
+
+
+operation::StudentControllerTest/test_save_new_student[snippets='http-request,request-fields,response-body,response-fields']
