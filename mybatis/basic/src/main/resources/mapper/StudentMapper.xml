@@ -75,9 +75,27 @@
 
 
   
-  <insert id="save"
-                parameterType="io.github.rura6502.basic.Student">
+  <!--
+    useGeneratedKeys="true"
+    keyProperty="id"
+   -->
+  <insert id="save" parameterType="io.github.rura6502.basic.Student">
+    <selectKey keyProperty="id" resultType="long" order="BEFORE">
+      SELECT SCOPE_IDENTITY() + 1;
+    </selectKey>
     INSERT INTO students(id, name, gender, age)
-      VALUES (${id}, #{name}, #{gender}, ${age})
+      VALUES (
+        ${id}
+        , '${@io.github.rura6502.basic.Student@addMr(name)}'
+        , #{gender}
+        , ${age})
+  </insert>
+
+  <insert id="saveAsMap" parameterType="map">
+    INSERT INTO students(id, name, gender, age)
+      VALUES (#{map.id}, #{map.name}, #{map.gender}, ${map.age})
+    <selectKey keyProperty="map.id" resultType="int" order="BEFORE">
+      SELECT SCOPE_IDENTITY() + 1;
+    </selectKey>
   </insert>
 </mapper>

@@ -28,5 +28,8 @@ public interface StudentMapper {
 
 
 
-  public int save(Student student);
+  public long save(Student student);
+
+  public long saveAsMap(@Param("map") Map<String, Object> student);
+
 }
